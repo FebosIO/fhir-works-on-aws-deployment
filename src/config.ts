@@ -26,6 +26,7 @@ import SubscriptionValidator from 'fhir-works-on-aws-routing/lib/router/validati
 import getAllowListedSubscriptionEndpoints from './subscriptions/allowList';
 import RBACRules from './RBACRules';
 import { loadImplementationGuides } from './implementationGuides/loadCompiledIGs';
+import {ElasticSearchCustomClient} from "./esClient";
 
 const { IS_OFFLINE, ENABLE_MULTI_TENANCY, ENABLE_SUBSCRIPTIONS } = process.env;
 
@@ -69,7 +70,7 @@ const esSearch = new ElasticSearchService(
     DynamoDbUtil.cleanItem,
     fhirVersion,
     loadImplementationGuides('fhir-works-on-aws-search-es'),
-    undefined,
+    undefined, // ElasticSearchCustomClient, //TODO: Cliente customizado de conexion
     { enableMultiTenancy },
 );
 
